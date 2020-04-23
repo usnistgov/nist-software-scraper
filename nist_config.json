@@ -1,0 +1,33 @@
+{
+    "agency": "DOC",
+    "organization": "National Institute of Standards and Technology",
+    "contact_email": "gretchen.greene@nist.gov",
+
+    "permissions": {
+        "usageType": "exemptByAgencyMission",
+        "exemptionText": "This source code resides on a private server and has not been properly evaluated for releaseability."
+    },
+
+    "GitHub": [
+        {
+            "url": "https://github.com",
+            "token": null,
+            "public_only": true,
+            "orgs": [
+                "usnistgov"
+            ],
+            "repos": [],
+            "exclude": []
+        }
+    ],
+
+    "GitLab": [
+        {
+            "url": "https://gitlab.com",
+            "token": null,
+            "fetch_languages": false,
+            "repos": [],
+            "exclude": []
+        }
+    ]
+}
