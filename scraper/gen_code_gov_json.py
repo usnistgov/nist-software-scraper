@@ -123,10 +123,10 @@ def main():
     if args.github_gov_orgs:
         config_json["github_gov_orgs"] = True
 
-    config_json["DOE CODE"] = {}
-    config_json["DOE CODE"]["json"] = args.doecode_json
-    config_json["DOE CODE"]["url"] = args.doecode_url
-    config_json["DOE CODE"]["api_key"] = args.doecode_api_key
+    config_json["DOC CODE"] = {}
+    config_json["DOC CODE"]["json"] = args.doecode_json
+    config_json["DOC CODE"]["url"] = args.doecode_url
+    config_json["DOC CODE"]["api_key"] = args.doecode_api_key
 
     output_path = config_json.get("output_path", None)
     output_path = args.output_path or output_path
