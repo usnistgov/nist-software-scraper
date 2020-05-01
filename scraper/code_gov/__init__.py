@@ -10,6 +10,15 @@ from scraper import github, gitlab, bitbucket, doecode, tfs
 logger = logging.getLogger(__name__)
 
 
+def process_repo_parallel(repo):
+    if repo.owner.login in excluded or repo.full_name in excluded:
+        logger.info("Excluding: %s", repo.full_name)
+
+    code_gov_project = Project.from_github3(
+        repo, labor_hours=compute_labor_hours
+    )
+    return code_gov_project
+
 def process_config(config):
     """
     Master function to process a Scraper config file
