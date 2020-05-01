@@ -117,27 +117,34 @@ def git_repo_to_sloc(url):
         }
     """
 
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        logger.debug("Cloning: url=%s tmp_dir=%s", url, tmp_dir)
+    tmp_dir = tempfile.TemporaryDirectory()
 
-        tmp_clone = os.path.join(tmp_dir, "clone-dir")
+    logger.debug("Cloning: url=%s tmp_dir=%s", url, tmp_dir.name)
 
-        cmd = ["git", "clone", "--depth=1", url, tmp_clone]
-        execute(cmd)
+    tmp_clone = os.path.join(tmp_dir.name, "clone-dir")
 
-        cmd = ["cloc", "--json", tmp_clone]
-        out, _ = execute(cmd)
+    cmd = ["git", "clone", "--depth=1", url, tmp_clone]
+    execute(cmd)
 
-        try:
-            json_start = out.find('{"header"')
-            json_blob = out[json_start:].replace("\\n", "").replace("'", "")
-            cloc_json = json.loads(json_blob)
-            sloc = cloc_json["SUM"]["code"]
-        except json.decoder.JSONDecodeError:
-            logger.debug("Error Decoding: url=%s, out=%s", url, out)
-            sloc = 0
+    cmd = ["cloc", "--json", tmp_clone]
+    out, _ = execute(cmd)
+
+    try:
+        json_start = out.find('{"header"')
+        json_blob = out[json_start:].replace("\\n", "").replace("'", "")
+        cloc_json = json.loads(json_blob)
+        sloc = cloc_json["SUM"]["code"]
+    except json.decoder.JSONDecodeError:
+        logger.debug("Error Decoding: url=%s, out=%s", url, out)
+        sloc = 0
 
     logger.debug("SLOC: url=%s, sloc=%d", url, sloc)
+
+    try:
+        # tmp_dir.cleanup()
+        hutil.rmtree(tmp_dir.name)
+    except Exception as e:
+        logger.debug("Error Cleaning: path=%s", tmp_clone)
 
     return sloc
 
@@ -212,13 +219,14 @@ def compute_labor_hours(sloc, month_hours="cocomo_book"):
 
 
 def labor_hours_from_url(url):
-    sum_sloc = git_repo_to_sloc(url)
-    logger.info("SLOC: %d", sum_sloc)
-
-    labor_hours = compute_labor_hours(sum_sloc)
-    logger.info("labor_hours: %d", labor_hours)
-
-    return labor_hours
+    # sum_sloc = git_repo_to_sloc(url)
+    # logger.info("SLOC: %d", sum_sloc)
+    #
+    # labor_hours = compute_labor_hours(sum_sloc)
+    # logger.info("labor_hours: %d", labor_hours)
+    #
+    # return labor_hours
+    return 0
 
 
 def _prune_dict_null_str(dictionary):

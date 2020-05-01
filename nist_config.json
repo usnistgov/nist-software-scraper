@@ -21,13 +21,5 @@
         }
     ],
 
-    "GitLab": [
-        {
-            "url": "https://gitlab.com",
-            "token": null,
-            "fetch_languages": false,
-            "repos": [],
-            "exclude": []
-        }
-    ]
+    "GitLab": []
 }
