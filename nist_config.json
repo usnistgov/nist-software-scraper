@@ -1,7 +1,7 @@
 {
-    "agency": "DOC",
+    "agency": "NIST",
     "organization": "National Institute of Standards and Technology",
-    "contact_email": "gretchen.greene@nist.gov",
+    "contact_email": "devops@nist.gov",
 
     "permissions": {
         "usageType": "exemptByAgencyMission",
