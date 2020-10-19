@@ -186,25 +186,27 @@ class Project(dict):
         project["repositoryURL"] = repository.git_url
         project["description"] = repository.description
 
-        try:
-            repo_license = repository.license()
-        except github3.exceptions.NotFoundError:
-            logger.debug("no license found for repo=%s", repository)
-            repo_license = None
+        #try:
+        #    repo_license = repository.license()
+        #except github3.exceptions.NotFoundError:
+        #    logger.debug("no license found for repo=%s", repository)
+        #    repo_license = None
+        #
+        #if repo_license:
+        #    license = repo_license.license
+        #    if license:
+        #        logger.debug("license spdx=%s; url=%s", license.spdx_id, license.url)
+        #        if license.url is None:
+        #            project["permissions"]["licenses"] = [{"name": license.spdx_id}]
+        #        else:
+        #            project["permissions"]["licenses"] = [
+        #                {"URL": license.url, "name": license.spdx_id}
+        #            ]
+        #    else:
+        #        project["permissions"]["licenses"] = None
 
-        if repo_license:
-            license = repo_license.license
-            if license:
-                logger.debug("license spdx=%s; url=%s", license.spdx_id, license.url)
-                if license.url is None:
-                    project["permissions"]["licenses"] = [{"name": license.spdx_id}]
-                else:
-                    project["permissions"]["licenses"] = [
-                        {"URL": license.url, "name": license.spdx_id}
-                    ]
-            else:
-                project["permissions"]["licenses"] = None
-
+        project["permissions"]["licenses"] = [{"URL": "https://raw.githubusercontent.com/usnistgov/newrepotemplate/master/LICENSE.md", "name": "NIST"}]
+        
         public_server = repository.html_url.startswith("https://github.com")
         if not repository.private and public_server:
             project["permissions"]["usageType"] = "openSource"
