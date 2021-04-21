@@ -205,7 +205,7 @@ class Project(dict):
         #    else:
         #        project["permissions"]["licenses"] = None
 
-        project["permissions"]["licenses"] = [{"URL": "https://raw.githubusercontent.com/usnistgov/opensource-repo/master/LICENSE", "name": "NIST"}]
+        project["permissions"]["licenses"] = [{"URL": "https://raw.githubusercontent.com/usnistgov/opensource-repo/master/LICENSE.md", "name": "NIST"}]
         
         public_server = repository.html_url.startswith("https://github.com")
         if not repository.private and public_server:
